@@ -4,7 +4,8 @@ RUN apt-get update -y && \
     apt-get install -y tree patch vim screen openssh-server subversion openssl ca-certificates psmisc && rm -rf /var/lib/apt/lists/*
 
 # Install latest nodejs
-RUN mkdir /nodejs && curl https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz | tar xvzf - -C /nodejs --strip-components=1
+RUN mkdir /nodejs && wget https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
+    tar xvJf node-v8.11.3-linux-x64.tar.xz -C /nodejs --strip-components=1 && rm -f node-v8.11.3-linux-x64.tar.xz
 
 # Setup sshd
 RUN mkdir /var/run/sshd && \
