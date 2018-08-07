@@ -7,14 +7,14 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - \
   && apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y git-core automake autoconf libtool build-essential pkg-config libtool \
      mpi-default-dev libicu-dev python-dev python3-dev libbz2-dev zlib1g-dev libssl-dev libgmp-dev \
-     clang-4.0 lldb-4.0 lld-4.0 llvm-4.0-dev libclang-4.0-dev ninja-build \
-  && rm -rf /var/lib/apt/lists/*
+     clang-4.0 lldb-4.0 lld-4.0 llvm-4.0-dev libclang-4.0-dev ninja-build
 
 RUN update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-4.0/bin/clang 400 \
   && update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-4.0/bin/clang++ 400
 
-RUN apt-get update -y && \
-    apt-get install -y tree patch vim screen openssh-server openssl ca-certificates psmisc && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y tree patch vim screen openssh-server openssl ca-certificates psmisc \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install latest nodejs
 RUN mkdir /nodejs && wget https://nodejs.org/dist/v8.11.3/node-v8.11.3-linux-x64.tar.xz && \
